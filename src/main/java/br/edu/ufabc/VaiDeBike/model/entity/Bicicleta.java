@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -22,12 +24,16 @@ public class Bicicleta {
 	
 	private Date dataAquisicao;
 	
-	private char status;
+	private String status;
 	
 	private int conservacao;
 	
 	@OneToMany(mappedBy = "bicicleta")
 	private Set<Emprestimo> emprestimos;	
+	
+	@ManyToOne
+	@JoinColumn(name="idPonto")
+	private Ponto ponto;
 	
 	public int getId() {
 		return id;
@@ -69,11 +75,19 @@ public class Bicicleta {
 		this.emprestimos = emprestimos;
 	}
 
-	public char getStatus() {
+	public Ponto getPonto() {
+		return ponto;
+	}
+
+	public void setPonto(Ponto ponto) {
+		this.ponto = ponto;
+	}
+
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(char status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 

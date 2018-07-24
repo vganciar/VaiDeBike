@@ -20,7 +20,7 @@ public class Emprestimo {
 	
 	private Date dataDevolucao;
 	
-	private char status;
+	private String status;
 	
 	@ManyToOne
 	@JoinColumn(name="idBicicleta")
@@ -32,7 +32,11 @@ public class Emprestimo {
 	
 	@ManyToOne
 	@JoinColumn(name="idPonto")
-	private Ponto ponto;
+	private Ponto pontoEmprestimo;
+	
+	@ManyToOne
+	@JoinColumn(name="idPonto")
+	private Ponto pontoDevolucao;
 
 	public int getId() {
 		return id;
@@ -58,11 +62,11 @@ public class Emprestimo {
 		this.dataDevolucao = dataDevolucao;
 	}
 
-	public char getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(char status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 
@@ -82,12 +86,19 @@ public class Emprestimo {
 		this.ciclista = ciclista;
 	}
 
-	public Ponto getPonto() {
-		return ponto;
+	public Ponto getPontoEmprestimo() {
+		return pontoEmprestimo;
 	}
 
-	public void setPonto(Ponto ponto) {
-		this.ponto = ponto;
+	public void setPontoEmprestimo(Ponto pontoEmprestimo) {
+		this.pontoEmprestimo = pontoEmprestimo;
 	}
-		
+
+	public Ponto getPontoDevolucao() {
+		return pontoDevolucao;
+	}
+
+	public void setPontoDevolucao(Ponto pontoDevolucao) {
+		this.pontoDevolucao = pontoDevolucao;
+	}			
 }

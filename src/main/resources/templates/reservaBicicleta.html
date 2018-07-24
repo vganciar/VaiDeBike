@@ -7,128 +7,70 @@
 
 <title>Reserva de Bicicletas</title>
 
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/custom.css">
 
-<!-- jQuery library -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script	type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBMEqiqFXjjF1rQNA6RITM3MyhJRBCGD4"></script>
+<script	type="text/javascript" src="/js/mapa.js"></script>
 
-<!-- Popper JS -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script type="text/javascript">	
 
-<!-- Latest compiled JavaScript -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-
-<style type="text/css">
-html {
-	height: 100%
-}
-
-body {
-	height: 100%;
-	margin: 0;
-	padding: 0
-}
-
-#map_canvas {
-	height: 100%
-}
-</style>
-
-<script type="text/javascript"
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBMEqiqFXjjF1rQNA6RITM3MyhJRBCGD4">
-	
-</script>
-
-<script type="text/javascript">
-	var geocoder;
-	var map;
-	var marker;
-
-	function initialize() {
-		var latlng = new google.maps.LatLng(-23.6517023, -46.528313);
-
-		var options = {
-			zoom : 16,
-			center : latlng,
-			mapTypeId : google.maps.MapTypeId.ROADMAP
-		};
-
-		map = new google.maps.Map(document.getElementById("mapa"), options);
-
-		geocoder = new google.maps.Geocoder();
-
-		marker = new google.maps.Marker({
-			map : map,
-			draggable : true,
+	$(document).ready(function() {
+		
+		function carregarNoMapa(endereco) {
+	        geocoder.geocode({ 'address': endereco + ', Brasil', 'region': 'BR' }, function (results, status) {
+	            if (status == google.maps.GeocoderStatus.OK) {
+	                if (results[0]) {
+	                    var latitude = results[0].geometry.location.lat();
+	                    var longitude = results[0].geometry.location.lng();
+	 
+	                    $('#txtEndereco').val(results[0].formatted_address);
+	                    $('#txtLatitude').val(latitude);
+	                    $('#txtLongitude').val(longitude);
+	 
+	                    var location = new google.maps.LatLng(latitude, longitude);
+	                    marker.setPosition(location);
+	                    map.setCenter(location);
+	                    map.setZoom(16);
+	                }
+	            }
+	        });
+	    }
+		
+		$("#btnEndereco").click(function() {
+			if ($(this).val() != "")
+				carregarNoMapa($("#txtEndereco").val());
 		});
 
-		marker.setPosition(latlng);
-	}
-
-	$(document).ready(
-			function() {
-				initialize();
-
-				function carregarNoMapa(endereco) {
-					geocoder.geocode({
-						'address' : endereco + ', Brasil',
-						'region' : 'BR'
-					}, function(results, status) {
-						if (status == google.maps.GeocoderStatus.OK) {
-							if (results[0]) {
-								var latitude = results[0].geometry.location
-										.lat();
-								var longitude = results[0].geometry.location
-										.lng();
-
-								$('#txtEndereco').val(
-										results[0].formatted_address);
-								$('#txtLatitude').val(latitude);
-								console.log($('#txtLatitude').val(latitude));
-								$('#txtLongitude').val(longitude);
-								console.log($('#txtLongitude').val(latitude));
-
-								var location = new google.maps.LatLng(latitude,
-										longitude);
-								marker.setPosition(location);
-								map.setCenter(location);
-								map.setZoom(16);
-							}
-						}
-					});
-				}
-
-				$("#btnEndereco").click(function() {
-					if ($(this).val() != "")
-						carregarNoMapa($("#txtEndereco").val());
-				});
-
-				$("#txtEndereco").blur(function() {
-					if ($(this).val() != "")
-						carregarNoMapa($(this).val());
-				});
-			});
+		$("#txtEndereco").blur(function() {
+			if ($(this).val() != "")
+				carregarNoMapa($(this).val());
+		});
+	});
 </script>
 </head>
 
-<body onload="initialize()">
+<body>
 	<form>
-		<div class="form-group">
-			<label for="txtEndereco">Endereço:</label> <input type="text"
-				id="txtEndereco" class="form-control" name="txtEndereco" />
+	
+	<div class="container">
+			<div class="form-group">
+				<label for="txtEndereco">Endereço:</label> <input type="text"
+					id="txtEndereco" class="form-control" name="txtEndereco" />
+			</div>
+
+			<input type="button" id="btnEndereco" name="btnEndereco" class="btn btn-primary" value="Mostrar no mapa" /> 
+			
+			<input type="hidden" id="txtLatitude" name="txtLatitude" /> 
+			
+			<input type="hidden" id="txtLongitude" name="txtLongitude" /> 
+			
+			<br />
+
+			<div id="mapa" style="width: 800px; height: 600px"></div>
 		</div>
-
-		<input type="button" id="btnEndereco" name="btnEndereco"
-			class="btn btn-primary" value="Mostrar no mapa" /> <input
-			type="hidden" id="txtLatitude" name="txtLatitude" /> <input
-			type="hidden" id="txtLongitude" name="txtLongitude" /> <br />
-
-		<div id="mapa" style="width: 800px; height: 600px"></div>
 
 	</form>
 </body>
