@@ -23,19 +23,19 @@ public class Emprestimo {
 	private String status;
 	
 	@ManyToOne
-	@JoinColumn(name="idBicicleta")
+	@JoinColumn(name="id_bicicleta")
 	private Bicicleta bicicleta;
 	
 	@ManyToOne
-	@JoinColumn(name="idCiclista")
+	@JoinColumn(name="id_ciclista")
 	private Ciclista ciclista;
 	
 	@ManyToOne
-	@JoinColumn(name="idPonto")
+	@JoinColumn(name="id_ponto_emprestimo")
 	private Ponto pontoEmprestimo;
 	
 	@ManyToOne
-	@JoinColumn(name="idPonto")
+	@JoinColumn(name="id_ponto_devolucao")
 	private Ponto pontoDevolucao;
 
 	public int getId() {

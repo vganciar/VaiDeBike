@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 
-<title>Reserva de Bicicletas</title>
+<title>Empréstimo de Bicicletas</title>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="/css/custom.css">
@@ -31,7 +31,7 @@
 	                    $('#txtLongitude').val(longitude);
 	 
 	                    var location = new google.maps.LatLng(latitude, longitude);
-	                    marker.setPosition(location);
+	                    
 	                    map.setCenter(location);
 	                    map.setZoom(16);
 	                }
@@ -56,12 +56,14 @@
 	<form>
 	
 	<div class="container">
-			<div class="form-group">
+			<div class="form-group col-sm-9">
 				<label for="txtEndereco">Endereço:</label> <input type="text"
 					id="txtEndereco" class="form-control" name="txtEndereco" />
 			</div>
 
-			<input type="button" id="btnEndereco" name="btnEndereco" class="btn btn-primary" value="Mostrar no mapa" /> 
+			<div class="col-sm-3">
+				<input type="button" id="btnEndereco" name="btnEndereco" class="btn btn-primary" value="Mostrar no mapa" />
+			</div>	 
 			
 			<input type="hidden" id="txtLatitude" name="txtLatitude" /> 
 			
@@ -69,7 +71,7 @@
 			
 			<br />
 
-			<div id="mapa" style="width: 800px; height: 600px"></div>
+			<div id="mapa" style="width: 100%; height: 600px"></div>
 		</div>
 
 	</form>

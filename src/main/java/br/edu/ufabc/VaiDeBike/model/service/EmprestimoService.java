@@ -2,9 +2,11 @@ package br.edu.ufabc.VaiDeBike.model.service;
 
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.edu.ufabc.VaiDeBike.model.entity.Bicicleta;
+import br.edu.ufabc.VaiDeBike.model.entity.Ciclista;
 import br.edu.ufabc.VaiDeBike.model.entity.Emprestimo;
 import br.edu.ufabc.VaiDeBike.model.entity.Ponto;
 import br.edu.ufabc.VaiDeBike.model.repository.BicicletaRepository;
@@ -17,6 +19,7 @@ public class EmprestimoService {
 	private EmprestimoRepository emprestimoRepository;			
 	private BicicletaRepository bicicletaRepository;	
 	
+	@Autowired
 	public EmprestimoService(BicicletaRepository bicicletaRepository, PontoRepository pontoRepository, EmprestimoRepository emprestimoRepository) {
 		this.bicicletaRepository = bicicletaRepository;		
 		this.emprestimoRepository = emprestimoRepository;
@@ -46,8 +49,11 @@ public class EmprestimoService {
 			
 			Emprestimo emprestimo = new Emprestimo(); 
 			
+			Ciclista ciclista = new Ciclista();
+			ciclista.setId(1);
+			
 			emprestimo.setBicicleta(bicicleta);
-			// emprestimo.setCiclista() usuario logado da sessao
+			emprestimo.setCiclista(ciclista); //usuario logado da sessao
 			emprestimo.setDataEmprestimo(new Date());
 			emprestimo.setPontoEmprestimo(ponto);
 			emprestimo.setStatus("A");

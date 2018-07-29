@@ -32,7 +32,7 @@ public class Bicicleta {
 	private Set<Emprestimo> emprestimos;	
 	
 	@ManyToOne
-	@JoinColumn(name="idPonto")
+	@JoinColumn(name="id_ponto")
 	private Ponto ponto;
 	
 	public int getId() {

@@ -19,12 +19,11 @@ public class Ponto {
 	@Column(nullable = false)
 	private String cep;
 	
-	private String coordenadas;
+	private String latitude;
+	
+	private String longitude;
 	
 	@OneToMany(mappedBy = "ponto")
-	private Set<Emprestimo> emprestimos;
-	
-	@OneToMany(mappedBy = "bicicleta")
 	private Set<Bicicleta> bicicletas;
 
 	public int getId() {
@@ -41,22 +40,22 @@ public class Ponto {
 
 	public void setCep(String cep) {
 		this.cep = cep;
-	}
-
-	public String getCoordenadas() {
-		return coordenadas;
-	}
-
-	public void setCoordenadas(String coordenadas) {
-		this.coordenadas = coordenadas;
 	}	
-	
-	public Set<Emprestimo> getEmprestimos() {
-		return emprestimos;
+
+	public String getLatitude() {
+		return latitude;
 	}
 
-	public void setEmprestimos(Set<Emprestimo> emprestimos) {
-		this.emprestimos = emprestimos;
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+
+	public String getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
 	}
 
 	public Set<Bicicleta> getBicicletas() {
