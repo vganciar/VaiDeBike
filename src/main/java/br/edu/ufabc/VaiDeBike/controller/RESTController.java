@@ -1,34 +1,38 @@
 package br.edu.ufabc.VaiDeBike.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.edu.ufabc.VaiDeBike.model.service.EmprestimoService;
 
-@Controller
-public class EmprestimoController {
+@RestController
+public class RESTController {
 	
 	private EmprestimoService emprestimoService;
 	
 	@Autowired
-	public EmprestimoController(EmprestimoService emprestimoService) {		
+	public RESTController(EmprestimoService emprestimoService) {		
 		this.emprestimoService = emprestimoService;
 	}
 	
-	@RequestMapping("/mapa")
-	public String exibeMapa(){		
-		return "mapa";
-	}
-	
-	@RequestMapping("/emprestimo/{ponto}")
-	public String reservarBicicleta(@PathVariable("ponto") String ponto){
+	@RequestMapping("/pontos")
+	public String getPontos()
+	{		
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonPontos = "";
 		
-		return "emprestimo";
+		try {
+			jsonPontos = mapper.writeValueAsString(emprestimoService.getPontos());
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return jsonPontos;
 	}
 	
 	/*public ModelAndView listar(){

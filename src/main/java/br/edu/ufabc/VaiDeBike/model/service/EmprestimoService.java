@@ -1,6 +1,7 @@
 package br.edu.ufabc.VaiDeBike.model.service;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,12 +18,14 @@ import br.edu.ufabc.VaiDeBike.model.repository.PontoRepository;
 public class EmprestimoService {
 	
 	private EmprestimoRepository emprestimoRepository;			
-	private BicicletaRepository bicicletaRepository;	
+	private BicicletaRepository bicicletaRepository;
+	private PontoRepository pontoRepository;
 	
 	@Autowired
 	public EmprestimoService(BicicletaRepository bicicletaRepository, PontoRepository pontoRepository, EmprestimoRepository emprestimoRepository) {
 		this.bicicletaRepository = bicicletaRepository;		
 		this.emprestimoRepository = emprestimoRepository;
+		this.pontoRepository = pontoRepository;
 	}
 	
 	public void devolverBicicleta(Ponto ponto, Integer emprestimoId) {
@@ -64,5 +67,10 @@ public class EmprestimoService {
 		}
 		
 		return false;				
+	}
+	
+	public List<Ponto> getPontos(){
+		
+		return pontoRepository.findAll();
 	}
 }
