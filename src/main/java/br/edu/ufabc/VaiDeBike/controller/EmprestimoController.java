@@ -1,13 +1,16 @@
 package br.edu.ufabc.VaiDeBike.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
+import br.edu.ufabc.VaiDeBike.model.entity.Bicicleta;
+import br.edu.ufabc.VaiDeBike.model.entity.Ponto;
 import br.edu.ufabc.VaiDeBike.model.service.EmprestimoService;
 
 @Controller
@@ -26,9 +29,22 @@ public class EmprestimoController {
 	}
 	
 	@RequestMapping("/emprestimo/{ponto}")
-	public String reservarBicicleta(@PathVariable("ponto") String ponto){
+	public ModelAndView exibeEmprestimo(@PathVariable("ponto") String idPonto){
 		
-		return "emprestimo";
+		List<Bicicleta> bicicletas = emprestimoService.getBicicletasPorPonto(Integer.parseInt(idPonto));		
+		
+		ModelAndView modelAndView = new ModelAndView("emprestimo");
+		modelAndView.addObject("bicicletas", bicicletas);
+
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/reserva/{bicicleta}", method = RequestMethod.POST)
+	public String reservarBicicleta(Ponto ponto, @PathVariable("bicicleta") String idBicicleta){
+		
+		emprestimoService.reservarBicicleta(ponto, Integer.parseInt(idBicicleta));
+		
+		return "mapa";
 	}
 	
 	/*public ModelAndView listar(){

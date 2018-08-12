@@ -34,14 +34,5 @@ public class RESTController {
 		
 		return jsonPontos;
 	}
-	
-	/*public ModelAndView listar(){
-	List<ContaCorrente> contas = contaCorrenteService.findAll();
-	
-	ModelAndView modelAndView = new ModelAndView("pesquisarContas");
-	modelAndView.addObject("contas", contas);
-	
-	return modelAndView;
-}*/
 
 }

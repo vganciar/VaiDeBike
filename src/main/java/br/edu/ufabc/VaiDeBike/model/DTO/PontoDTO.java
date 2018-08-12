@@ -1,29 +1,17 @@
-package br.edu.ufabc.VaiDeBike.model.entity;
+package br.edu.ufabc.VaiDeBike.model.DTO;
 
 import java.time.LocalTime;
-import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
-@Entity
-public class Ponto {
+public class PontoDTO {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(nullable = false)
+	private int bicicletasDisponiveis;
+	
 	private String endereco;
 	
-	@Column(nullable = false)
 	private String latitude;
 	
-	@Column(nullable = false)
 	private String longitude;
 	
 	private String nome;
@@ -32,16 +20,21 @@ public class Ponto {
 	
 	private String horaFinal;
 	
-	@OneToMany(mappedBy = "ponto")
-	private Set<Bicicleta> bicicletas;
-
 	public int getId() {
 		return id;
 	}
 
 	public void setId(int id) {
 		this.id = id;
-	}		
+	}	
+
+	public int getBicicletasDisponiveis() {
+		return bicicletasDisponiveis;
+	}
+
+	public void setBicicletasDisponiveis(int bicicletasDisponiveis) {
+		this.bicicletasDisponiveis = bicicletasDisponiveis;
+	}
 
 	public String getEndereco() {
 		return endereco;
@@ -50,7 +43,7 @@ public class Ponto {
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
-
+	
 	public String getLatitude() {
 		return latitude;
 	}
@@ -75,14 +68,6 @@ public class Ponto {
 		this.nome = nome;
 	}
 
-	public Set<Bicicleta> getBicicletas() {
-		return bicicletas;
-	}
-
-	public void setBicicletas(Set<Bicicleta> bicicletas) {
-		this.bicicletas = bicicletas;
-	}
-	
 	public String getHoraIncial() {
 		return horaIncial;
 	}
@@ -98,4 +83,5 @@ public class Ponto {
 	public void setHoraFinal(String horaFinal) {
 		this.horaFinal = horaFinal;
 	}
+	
 }
