@@ -23,7 +23,7 @@ public class EmprestimoController {
 		this.emprestimoService = emprestimoService;
 	}
 	
-	@RequestMapping("/mapa")
+	@RequestMapping("/")
 	public String exibeMapa(){		
 		return "mapa";
 	}
@@ -32,9 +32,11 @@ public class EmprestimoController {
 	public ModelAndView exibeEmprestimo(@PathVariable("ponto") String idPonto){
 		
 		List<Bicicleta> bicicletas = emprestimoService.getBicicletasPorPonto(Integer.parseInt(idPonto));		
+		Ponto ponto = emprestimoService.findPontoById(Integer.parseInt(idPonto));
 		
 		ModelAndView modelAndView = new ModelAndView("emprestimo");
 		modelAndView.addObject("bicicletas", bicicletas);
+		modelAndView.addObject("ponto", ponto);		
 
 		return modelAndView;
 	}
@@ -46,14 +48,4 @@ public class EmprestimoController {
 		
 		return "mapa";
 	}
-	
-	/*public ModelAndView listar(){
-	List<ContaCorrente> contas = contaCorrenteService.findAll();
-	
-	ModelAndView modelAndView = new ModelAndView("pesquisarContas");
-	modelAndView.addObject("contas", contas);
-	
-	return modelAndView;
-}*/
-
 }

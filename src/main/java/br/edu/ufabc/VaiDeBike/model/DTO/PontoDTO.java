@@ -16,7 +16,7 @@ public class PontoDTO {
 	
 	private String nome;
 	
-	private String horaIncial;
+	private String horaInicial;
 	
 	private String horaFinal;
 	
@@ -68,12 +68,12 @@ public class PontoDTO {
 		this.nome = nome;
 	}
 
-	public String getHoraIncial() {
-		return horaIncial;
+	public String getHoraInicial() {
+		return horaInicial;
 	}
 
-	public void setHoraIncial(String horaIncial) {
-		this.horaIncial = horaIncial;
+	public void setHoraInicial(String horaInicial) {
+		this.horaInicial = horaInicial;
 	}
 
 	public String getHoraFinal() {

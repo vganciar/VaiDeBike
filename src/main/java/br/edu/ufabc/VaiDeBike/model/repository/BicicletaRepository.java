@@ -4,11 +4,12 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import br.edu.ufabc.VaiDeBike.model.entity.Bicicleta;
 
-public interface BicicletaRepository extends JpaRepository<Bicicleta, Integer> {
+public interface BicicletaRepository extends JpaRepository<Bicicleta, Integer> {	
 	
-	@Query("select * from Bicicleta where ponto = ?1")
-    List<Bicicleta> findAllByPonto(int idPonto);
+	@Query("SELECT b FROM Bicicleta b WHERE id_ponto = :idPonto")
+    public List<Bicicleta> findByPonto(@Param("idPonto") int idPonto);
 }

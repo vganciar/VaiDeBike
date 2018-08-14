@@ -85,7 +85,7 @@ public class EmprestimoService {
 			pontoDTO.setLatitude(ponto.getLatitude());
 			pontoDTO.setLongitude(ponto.getLongitude());
 			pontoDTO.setNome(ponto.getNome());
-			pontoDTO.setHoraIncial(ponto.getHoraIncial());
+			pontoDTO.setHoraInicial(ponto.getHoraInicial());
 			pontoDTO.setHoraFinal(ponto.getHoraFinal());
 			
 			int count = 0;
@@ -106,7 +106,12 @@ public class EmprestimoService {
 	
 	public List<Bicicleta> getBicicletasPorPonto(int idPonto){
 		
-		return bicicletaRepository.findAllByPonto(idPonto);
-		
+		return bicicletaRepository.findByPonto(idPonto);		
 	} 	
+	
+	public Ponto findPontoById(int idPonto){
+		
+		return pontoRepository.findById(idPonto).get();
+		
+	}
 }

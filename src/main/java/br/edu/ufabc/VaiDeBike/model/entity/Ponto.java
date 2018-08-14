@@ -28,7 +28,7 @@ public class Ponto {
 	
 	private String nome;
 	
-	private String horaIncial;
+	private String horaInicial;
 	
 	private String horaFinal;
 	
@@ -83,12 +83,12 @@ public class Ponto {
 		this.bicicletas = bicicletas;
 	}
 	
-	public String getHoraIncial() {
-		return horaIncial;
+	public String getHoraInicial() {
+		return horaInicial;
 	}
 
-	public void setHoraIncial(String horaIncial) {
-		this.horaIncial = horaIncial;
+	public void setHoraIncial(String horaInicial) {
+		this.horaInicial = horaInicial;
 	}
 
 	public String getHoraFinal() {
