@@ -8,7 +8,7 @@
 <title>Cadastro de Usuário</title>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
@@ -25,27 +25,27 @@
 				<fieldset>					
 					<div class="form-group col-sm-6">
 						<label>Nome</label>
-   						<input class="form-control" id="nome" name="nome">
+   						<input class="form-control" id="nome" name="nome" required="">
    					</div>
 					<br />
 					<div class="form-group col-sm-6">
 						<label>CPF</label>
-   						<input class="form-control" id="CPF" name="CPF">
+   						<input class="form-control" id="CPF" name="CPF" required="" pattern="[0-9]">
    					</div>
 					<br />
 					<div class="form-group col-sm-6">
 						<label>Celular</label>
-   						<input class="form-control" id="celular" name="celular">
+   						<input class="form-control" id="celular" name="celular" required="" type="number">
    					</div>
 					<br />
 					<div class="form-group col-sm-6">
 						<label>Login</label>
-   						<input class="form-control" id="login" name="login">
+   						<input class="form-control" id="login" name="login" required="">
    					</div>
 					<br />
 					<div class="form-group col-sm-6">
 						<label>Senha</label>
-   						<input type="password" class="form-control" id="senha" name="senha">
+   						<input type="password" class="form-control" id="senha" name="senha" required="">
    					</div>
 					<br />
 				</fieldset>

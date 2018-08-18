@@ -8,7 +8,7 @@
 <title>Vai de Bike</title>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
@@ -19,10 +19,39 @@
 <body>
 	<div class="container">
 
-	<a href="cadastroCiclista">Cadastrar Usuário</a>
-	<a href="cadastroBicicleta">Cadastrar Bicicleta</a>		
-		
+	<!-- <a href="cadastroCiclista">Cadastrar Usuário</a><br />
+	<a href="cadastroBicicleta">Cadastrar Bicicleta</a>		-->
+	
+	<h2>Entrar</h2><br/>
+	
+	<div id="falhaLogin" class="row">
+	<div class="alert alert-danger">Usuário ou senha inválido.</div>
 	</div>	
+		
+	<form method="POST">
+		
+			<div>
+				<fieldset>					
+					<div class="form-group col-sm-6">
+						<label>Login</label> 
+   						<input class="form-control" id="login" name="login" required="">
+   					</div>
+					<br />
+					<div class="form-group col-sm-6">
+						<label>Senha</label>
+   						<input type="password" class="form-control" id="senha" name="senha" required="">
+   					</div>
+					<br />
+					<div class="col-sm-6">
+					<button type="submit" name="submit" value="value" class="btn btn-primary">Entrar</button>
+					</div>
+				</fieldset>
+				
+			</div>
+	</form>		
+	</div>
+	
+	
+			
 </body>
-
 </html>

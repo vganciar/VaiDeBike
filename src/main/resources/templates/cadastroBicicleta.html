@@ -5,10 +5,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 
-<title>Cadastro de Usuário</title>
+<title>Cadastro de Bicicleta</title>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
@@ -18,29 +18,29 @@
 
 <body>
 	<div class="container">
-		<h3>CADASTRO DE USUARIO</h3><br />
+		<h3>CADASTRO DE BICICLETA</h3><br />
 		<form method="POST" th:action="@{/cadastraBicicleta}">
 		
 			<div>
 				<fieldset>					
 					<div class="form-group col-sm-6">
 						<label>Modelo</label>
-   						<input class="form-control" id="modelo" name="modelo">
+   						<input class="form-control" id="modelo" name="modelo" required="">
    					</div>
 					<br />
 					<div class="form-group col-sm-6">
 						<label>Cor</label>
-   						<input class="form-control" id="cor" name="cor">
+   						<input class="form-control" id="cor" name="cor" required="">
    					</div>
 					<br />
 					<div class="form-group col-sm-6">
 						<label>Status</label>
-   						<input class="form-control" id="status" name="status">
+   						<input class="form-control" id="status" name="status" required="">
    					</div>
 					<br />
 					<div class="form-group col-sm-6">
 						<label>Conservação</label>
-   						<input class="form-control" id="conservacao" name="conservacao">
+   						<input class="form-control" id="conservacao" name="conservacao" required="" type="number" min="0" max="10" step="1">
    					</div>
 					<br />				
 				</fieldset>
