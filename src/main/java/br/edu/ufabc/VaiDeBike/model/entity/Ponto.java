@@ -1,5 +1,6 @@
 package br.edu.ufabc.VaiDeBike.model.entity;
 
+import java.time.LocalTime;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -17,12 +18,22 @@ public class Ponto {
 	private int id;
 	
 	@Column(nullable = false)
-	private String cep;
+	private String endereco;
 	
-	private String coordenadas;
+	@Column(nullable = false)
+	private String latitude;
+	
+	@Column(nullable = false)
+	private String longitude;
+	
+	private String nome;
+	
+	private String horaInicial;
+	
+	private String horaFinal;
 	
 	@OneToMany(mappedBy = "ponto")
-	private Set<Emprestimo> emprestimos;
+	private Set<Bicicleta> bicicletas;
 
 	public int getId() {
 		return id;
@@ -30,30 +41,61 @@ public class Ponto {
 
 	public void setId(int id) {
 		this.id = id;
+	}		
+
+	public String getEndereco() {
+		return endereco;
 	}
 
-	public String getCep() {
-		return cep;
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
 	}
 
-	public void setCep(String cep) {
-		this.cep = cep;
+	public String getLatitude() {
+		return latitude;
 	}
 
-	public String getCoordenadas() {
-		return coordenadas;
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
 	}
 
-	public void setCoordenadas(String coordenadas) {
-		this.coordenadas = coordenadas;
-	}	
+	public String getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public Set<Bicicleta> getBicicletas() {
+		return bicicletas;
+	}
+
+	public void setBicicletas(Set<Bicicleta> bicicletas) {
+		this.bicicletas = bicicletas;
+	}
 	
-	public Set<Emprestimo> getEmprestimos() {
-		return emprestimos;
+	public String getHoraInicial() {
+		return horaInicial;
 	}
 
-	public void setEmprestimos(Set<Emprestimo> emprestimos) {
-		this.emprestimos = emprestimos;
+	public void setHoraIncial(String horaInicial) {
+		this.horaInicial = horaInicial;
 	}
-	
+
+	public String getHoraFinal() {
+		return horaFinal;
+	}
+
+	public void setHoraFinal(String horaFinal) {
+		this.horaFinal = horaFinal;
+	}
 }

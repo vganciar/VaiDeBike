@@ -7,7 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+
 
 @Entity
 public class Bicicleta {
@@ -28,6 +32,10 @@ public class Bicicleta {
 	
 	@OneToMany(mappedBy = "bicicleta")
 	private Set<Emprestimo> emprestimos;	
+	
+	@ManyToOne
+	@JoinColumn(name="id_ponto")
+	private Ponto ponto;
 	
 	public int getId() {
 		return id;
@@ -69,6 +77,14 @@ public class Bicicleta {
 		this.emprestimos = emprestimos;
 	}
 
+	public Ponto getPonto() {
+		return ponto;
+	}
+
+	public void setPonto(Ponto ponto) {
+		this.ponto = ponto;
+	}	
+	
 	public char getStatus() {
 		return status;
 	}

@@ -1,14 +1,23 @@
 package br.edu.ufabc.VaiDeBike.model.entity;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import org.springframework.stereotype.Repository;
 
+@Repository
 @Entity
-public class Usuario {
-	
+@Inheritance (strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipo", length = 1, discriminatorType = DiscriminatorType.CHAR)
+@DiscriminatorValue("U")
+public class Usuario {	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -22,8 +31,8 @@ public class Usuario {
 	@Column(nullable = false)
 	private String celular;	
 	
-	@Column(nullable = false)
-	private char tipo;	
+	@Column(insertable=false, updatable=false)
+    private char tipo;	
 	
 	@Column(nullable = false)
 	private String login;

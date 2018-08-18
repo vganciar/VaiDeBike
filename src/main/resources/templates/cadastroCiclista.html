@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+
+<title>Cadastro de Usuário</title>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+</head>
+
+</head>
+
+<body>
+	<div class="container">
+		<h3>CADASTRO DE USUARIO</h3><br />
+		<form method="POST" th:action="@{/cadastraCiclista}">
+		
+			<div>
+				<fieldset>					
+					<div class="form-group col-sm-6">
+						<label>Nome</label>
+   						<input class="form-control" id="nome" name="nome">
+   					</div>
+					<br />
+					<div class="form-group col-sm-6">
+						<label>CPF</label>
+   						<input class="form-control" id="CPF" name="CPF">
+   					</div>
+					<br />
+					<div class="form-group col-sm-6">
+						<label>Celular</label>
+   						<input class="form-control" id="celular" name="celular">
+   					</div>
+					<br />
+					<div class="form-group col-sm-6">
+						<label>Login</label>
+   						<input class="form-control" id="login" name="login">
+   					</div>
+					<br />
+					<div class="form-group col-sm-6">
+						<label>Senha</label>
+   						<input type="password" class="form-control" id="senha" name="senha">
+   					</div>
+					<br />
+				</fieldset>
+			</div>
+			<button type="submit" name="submit" value="value" class="btn btn-primary">Salvar</button>
+			
+		
+		</form>
+			
+		
+	</div>	
+</body>
+
+</html>
