@@ -2,31 +2,48 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
+<title>Vai de Bike</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-
-<title>Vai de Bike</title>
-
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
-
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/custom.css">
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
 </head>
 
 </head>
 
 <body>
-	<div class="container">
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#btn-login").click(function(){
+			var vLogin = $("#login").val(); 
+			var vSenha = $("#senha").val(); 
+			
+			$.ajax({url: 'http://localhost:8080/Usuario/login',
+				type: 'POST', 
+				data: {"login": vLogin, "senha": vSenha},				
+				success: function(data){
+					if(data=="ok"){						
+						$(location).attr('href','http://localhost:8080/menu');						
+					} else {						
+						alert("Usuário e/ou senha inválidos.");						
+					}
+				}
+			});	
+		});
+	});	
+</script>
 
-	<!-- <a href="cadastroCiclista">Cadastrar Usuário</a><br />
-	<a href="cadastroBicicleta">Cadastrar Bicicleta</a>		-->
+	<div class="jumbotron text-center">
+	  <h1>VAI DE BIKE</h1>	 
+	</div>
+
+	<div class="container">
 	
 	<h2>Entrar</h2><br/>
-	
-	<div id="falhaLogin" class="row">
-	<div class="alert alert-danger">Usuário ou senha inválido.</div>
-	</div>	
 		
 	<form method="POST">
 		
@@ -43,15 +60,14 @@
    					</div>
 					<br />
 					<div class="col-sm-6">
-					<button type="submit" name="submit" value="value" class="btn btn-primary">Entrar</button>
+					<button type="submit" name="submit" value="value" class="btn btn-primary" id="btn-login">Entrar</button>
 					</div>
-				</fieldset>
-				
+				</fieldset>				
 			</div>
 	</form>		
-	</div>
-	
-	
+
+	</div>		
 			
 </body>
+
 </html>

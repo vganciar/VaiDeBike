@@ -13,4 +13,8 @@ public interface CiclistaRepository extends JpaRepository<Ciclista, Integer> {
 	
 	@Query("SELECT u FROM Usuario u WHERE id = :id")
     public List<Ciclista> findById(@Param("id") int id);
+	
+	@Query("SELECT u FROM Usuario u WHERE login = :login")
+    public Ciclista findOne(@Param("login") String login);
+	
 }

@@ -8,8 +8,8 @@
 <title>Cadastro de Bicicleta</title>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
-
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/custom.css">
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 </head>
@@ -17,40 +17,56 @@
 </head>
 
 <body>
+	<div class="jumbotron text-center">
+	  <h1>VAI DE BIKE</h1>	 
+	</div>
+
 	<div class="container">
-		<h3>CADASTRO DE BICICLETA</h3><br />
+		<h3>Cadastro de bicicleta</h3><br />
 		<form method="POST" th:action="@{/cadastraBicicleta}">
 		
 			<div>
 				<fieldset>					
 					<div class="form-group col-sm-6">
 						<label>Modelo</label>
-   						<input class="form-control" id="modelo" name="modelo" required="">
+   						<input class="form-control" id="modelo" name="modelo" required>
    					</div>
 					<br />
 					<div class="form-group col-sm-6">
 						<label>Cor</label>
-   						<input class="form-control" id="cor" name="cor" required="">
+   						<input class="form-control" id="cor" name="cor" required>
    					</div>
 					<br />
 					<div class="form-group col-sm-6">
 						<label>Status</label>
-   						<input class="form-control" id="status" name="status" required="">
+   						<select class="form-control" id="status" name="status">
+							<option value="D">Disponível</option>	
+							<option value="I">Indisponível</option>	
+						</select>
    					</div>
 					<br />
 					<div class="form-group col-sm-6">
 						<label>Conservação</label>
-   						<input class="form-control" id="conservacao" name="conservacao" required="" type="number" min="0" max="10" step="1">
+   						<input class="form-control" id="conservacao" name="conservacao" required type="number" min="0" max="10" step="1">
+   					</div>
+					<br />	
+					<div class="form-group col-sm-6">
+						<label>Ponto</label>
+   						<select class="form-control" id="ponto" name="ponto">
+							<option th:each="p : ${pto}" th:value="${p.id}" th:utext="${p.nome}"></option>		
+						</select>
    					</div>
 					<br />				
 				</fieldset>
 			</div>
+			<div class="form-group col-sm-6">
 			<button type="submit" name="submit" value="value" class="btn btn-primary">Salvar</button>
-			
-		
+			</div>		
 		</form>
-			
-		
+		<br />
+		<div class="form-group col-sm-6">
+		<a href="/menu" class="btn btn-info" role="button">Voltar</a>
+		</div>
 	</div>	
 </body>
 
