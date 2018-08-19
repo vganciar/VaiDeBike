@@ -64,12 +64,13 @@ public class CadastroService {
 	public boolean verificaLogin(String login) {
 		Usuario us = new Usuario();
 		us = ciclistaRepository.findOne(login);	
-		if (us == null) {
+		System.out.println("***********************"+us+"******************************");
+		if (us == null) { 
 			return true; //login livre
 		}
 		else {			
 			return false; //login ja cadastrado
-		}	
+		}
 	}
 	
 }

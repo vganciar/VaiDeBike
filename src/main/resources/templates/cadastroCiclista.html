@@ -18,26 +18,27 @@
 
 <body>
 
-<!-- <script type="text/javascript">
-	$(document).ready(function(){
-		$("#btn-salvar").click(function(e){
-			var vLogin = $("#login").val(); 			
-			
-			$.ajax({url: 'http://localhost:8080/Usuario/validaLogin',
+<script type="text/javascript">
+	$(document).ready(function(){		
+		$("#login").change(function(){					
+			var vLogin = $("#login").val();
+			$.ajax({
+				url: 'http://localhost:8080/Usuario/validaLogin',
 				type: 'POST', 
 				data: {"login": vLogin},				
 				success: function(data){
-					if(data=="ok"){						
-						$(location).attr('href','http://localhost:8080/menu');						
-					} else {
+					if(data=="fail"){						
 						alert("Este login já está sendo utilizado.");
-						e.preventDefault();	
-					}
+						$("#login").val("");
+					} 
+				}, 
+				error: function(){		
+					$(location).attr('href','http://localhost:8080/menu');	
 				}
 			});	
 		});
 	});	
-</script>-->
+</script>
 
 	<div class="jumbotron text-center">
 	  <h1>VAI DE BIKE</h1>	 

@@ -23,7 +23,7 @@
 			var vSenha = $("#senha").val(); 
 			
 			$.ajax({url: 'http://localhost:8080/Usuario/login',
-				type: 'POST', 
+				type: 'POST',
 				data: {"login": vLogin, "senha": vSenha},				
 				success: function(data){
 					if(data=="ok"){						
