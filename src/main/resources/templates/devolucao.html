@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+
+<title>Empréstimo de Bicicletas</title>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+	<div class="container">
+
+		<h3>Ciclista</h3>
+		<hr>
+
+		<form method="POST" id="formDevolucao">
+			<div th:object="${ciclista}">
+
+				<input th:field="*{id}"></input> <br />
+				<div class="form-group col-sm-6">
+					<input th:field="*{nome}" class="form-control" readOnly="readonly"></input>
+				</div>
+
+				<br />
+				<div class="form-group col-sm-6">
+					<input th:field="*{cpf}" class="form-control" readOnly="readonly"></input>
+				</div>
+			</div>
+
+			<br />
+
+			<div th:object="${ponto}">
+				<div class="form-group col-sm-6">
+					<select class="form-control" name="id">
+						<option value="0" th:text="Selecionar Ponto"></option>
+						<option th:each="ponto : ${pontos}" th:value="${ponto.id}" th:text="${ponto.nome}"></option>
+					</select>
+				</div>
+			</div>
+		</form>
+
+		<h3>Lista de Emprestimos</h3>
+		<hr>
+
+		<div th:unless="${#lists.isEmpty(emprestimos)}">
+			<div class="panel-body">
+				<div class="table-responsive">
+					<table class="table table-sm table-striped table-hover table-bordered">
+						<thead>
+							<tr>
+								<th>Ponto de Empréstimo</th>
+								<th>Modelo da Bicicleta</th>
+								<th>Data do Empréstimo</th>
+								<th>Data para Devolução</th>
+								<th>Status</th>
+								<th><i class="glyphicon glyphicon-cog"></i></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:id="${emprestimo.id}" th:each="emprestimo: ${emprestimos}">
+								<td th:text="${emprestimo.ponto.nome}"></td>
+								<td th:text="${emprestimo.bicicleta.modelo}"></td>
+								<td th:text="${emprestimo.dataEmprestimo}"></td>
+								<td th:text="${emprestimo.dataDevolucao}"></td>
+
+								<td>
+									<div th:switch="${emprestimo.status}">
+										<div th:case="A">
+											<button type="submit" class="btn btn-primary" form="formDevolucao" th:formaction="@{/devolver/{emprestimo}(id=${emprestimo.id})}">Devolver</button>
+										</div>
+										
+										<div th:case="F">
+											<p th:text="${emprestimo.status}" />
+										</div>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
