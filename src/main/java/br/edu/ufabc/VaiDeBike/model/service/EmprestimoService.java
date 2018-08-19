@@ -131,4 +131,5 @@ public class EmprestimoService {
 		
 		return pontoRepository.findAll();		
 	}
+	
 }

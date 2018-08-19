@@ -18,17 +18,12 @@ import br.edu.ufabc.VaiDeBike.model.service.EmprestimoService;
 @Controller
 public class EmprestimoController {
 	
+	@Autowired
 	private EmprestimoService emprestimoService;
 	
-	@Autowired
-	public EmprestimoController(EmprestimoService emprestimoService) {		
+	/*public EmprestimoController(EmprestimoService emprestimoService) {		
 		this.emprestimoService = emprestimoService;
-	}
-	
-	@RequestMapping("/")
-	public String exibeMapa(){		
-		return "mapa";
-	}
+	}*/
 	
 	@RequestMapping("/emprestimo/{ponto}")
 	public ModelAndView exibeEmprestimo(@PathVariable("ponto") String idPonto){
@@ -57,7 +52,7 @@ public class EmprestimoController {
 
 		return modelAndView;
 	}
-	
+		
 	@RequestMapping(value = "/reservar/{bicicleta}", method = RequestMethod.POST)
 	public String reservarBicicleta(Ponto ponto, @PathVariable("bicicleta") String idBicicleta){
 		

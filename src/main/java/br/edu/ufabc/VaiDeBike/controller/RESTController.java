@@ -12,12 +12,12 @@ import br.edu.ufabc.VaiDeBike.model.service.EmprestimoService;
 @RestController
 public class RESTController {
 	
+	@Autowired
 	private EmprestimoService emprestimoService;
 	
-	@Autowired
-	public RESTController(EmprestimoService emprestimoService) {		
+	/*public RESTController(EmprestimoService emprestimoService) {		
 		this.emprestimoService = emprestimoService;
-	}
+	}*/
 	
 	@RequestMapping("/pontos")
 	public String getPontos()

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+
+<title>Empréstimo de Bicicletas</title>
+
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/custom.css">
+
+<script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+	<div class="container">		
+		<h3>Lista de Ciclistas</h3>
+		<hr>
+
+		<div th:unless="${#lists.isEmpty(ciclistas)}">
+			<div class="panel-body">
+				<div class="table-responsive">
+					<table class="table table-sm table-striped table-hover table-bordered">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Nome</th>
+								<th>CPF</th>
+								<th><i class="glyphicon glyphicon-cog"></i></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:id="${ciclista.id}" th:each="ciclista: ${ciclistas}">
+								<td th:text="${ciclista.id}"></td>
+								<td th:text="${ciclista.nome}"></td>
+								<td th:text="${ciclista.cpf}"></td>
+
+								<td>
+									<a class="btn btn-primary" th:href="@{/devolucao/{ciclista}(id=${ciclista.id})}">Empréstimos</a>									
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

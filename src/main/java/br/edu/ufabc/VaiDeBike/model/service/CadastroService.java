@@ -20,7 +20,7 @@ public class CadastroService {
 	@Autowired
 	private BicicletaRepository bibicletaRepository;
 	
-	public void cadastroCiclista(String nome, String CPF, String celular, String login, String senha) {
+	public void cadastrarCiclista(String nome, String CPF, String celular, String login, String senha) {
 		
 		Ciclista ciclista = new Ciclista();		
 		ciclista.setNome(nome);
@@ -33,7 +33,7 @@ public class CadastroService {
 		ciclistaRepository.save(ciclista);				
 	}
 	
-	public void cadastroBicicleta(String modelo, String cor, char status, int conservacao, Ponto ponto) {
+	public void cadastrarBicicleta(String modelo, String cor, String status, int conservacao, Ponto ponto) {
 		
 		Bicicleta bicicleta = new Bicicleta();
 		bicicleta.setModelo(modelo);
@@ -45,32 +45,4 @@ public class CadastroService {
 		bicicleta.setPonto(ponto);
 		bibicletaRepository.save(bicicleta);
 	}
-	
-	//autenticacao
-	public boolean verificaLoginSenha(String login, String senha) {
-		Usuario us = new Usuario();
-		us = ciclistaRepository.findOne(login);	
-		if (us == null) {
-			System.out.println("Usuario nao encontrado");
-			return false;
-		}
-		else {
-			if(senha.equals(us.getSenha())) return true;
-			else return false;
-		}	
-	}
-	
-	//no cadastro, verifica se login ja foi usado
-	public boolean verificaLogin(String login) {
-		Usuario us = new Usuario();
-		us = ciclistaRepository.findOne(login);	
-		System.out.println("***********************"+us+"******************************");
-		if (us == null) { 
-			return true; //login livre
-		}
-		else {			
-			return false; //login ja cadastrado
-		}
-	}
-	
 }

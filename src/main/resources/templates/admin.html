@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+
+<title>Vai de Bike</title>
+
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/custom.css">
+
+<script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+
+<script src="https://code.jquery.com/ui/1.10.4/jqueryui.js"></script>	
+
+</head>
+
+<body>
+	<!-- <div class="jumbotron text-center">
+	  <h1>VAI DE BIKE</h1>	 
+	</div> -->
+	
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Vai de Bike</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li class="active"><a th:href="@{/}"><i class="glyphicon glyphicon-home">&nbsp</i>Home</a></li>
+				<li><a th:href="@{/bicicleta/cadastro}">Bicileta</a></li>
+				<li><a th:href="@{/ciclista/list}">Empréstimos</a></li>
+				<li><a href="#">Page 2</a></li>
+			</ul>
+
+			<!-- <ul class="nav navbar-nav navbar-right">
+				<li>
+					
+				</li>			
+			</ul> -->
+		</div>
+	</nav>	
+	
+	<div class="container">
+	<h2>Menu</h2><br/>
+		
+	<a href="cadastroCiclista">Cadastrar Usuário</a><br />
+	<a href="cadastroBicicleta">Cadastrar Bicicleta</a>		
+
+	</div>		
+			
+</body>
+</html>
