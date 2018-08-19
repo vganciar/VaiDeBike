@@ -10,6 +10,6 @@ import br.edu.ufabc.VaiDeBike.model.entity.Bicicleta;
 
 public interface BicicletaRepository extends JpaRepository<Bicicleta, Integer> {	
 	
-	@Query("SELECT b FROM Bicicleta b WHERE id_ponto = :idPonto")
+	@Query("SELECT b FROM Bicicleta b WHERE id_ponto = :idPonto AND status = 'D'")
     public List<Bicicleta> findByPonto(@Param("idPonto") int idPonto);
 }

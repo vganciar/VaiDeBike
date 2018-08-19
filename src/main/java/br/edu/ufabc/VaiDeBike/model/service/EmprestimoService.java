@@ -13,6 +13,7 @@ import br.edu.ufabc.VaiDeBike.model.entity.Ciclista;
 import br.edu.ufabc.VaiDeBike.model.entity.Emprestimo;
 import br.edu.ufabc.VaiDeBike.model.entity.Ponto;
 import br.edu.ufabc.VaiDeBike.model.repository.BicicletaRepository;
+import br.edu.ufabc.VaiDeBike.model.repository.CiclistaRepository;
 import br.edu.ufabc.VaiDeBike.model.repository.EmprestimoRepository;
 import br.edu.ufabc.VaiDeBike.model.repository.PontoRepository;
 
@@ -22,17 +23,19 @@ public class EmprestimoService {
 	private EmprestimoRepository emprestimoRepository;			
 	private BicicletaRepository bicicletaRepository;
 	private PontoRepository pontoRepository;
+	private CiclistaRepository ciclistaRepository;
 	
 	@Autowired
-	public EmprestimoService(BicicletaRepository bicicletaRepository, PontoRepository pontoRepository, EmprestimoRepository emprestimoRepository) {
+	public EmprestimoService(BicicletaRepository bicicletaRepository, PontoRepository pontoRepository, EmprestimoRepository emprestimoRepository, CiclistaRepository ciclistaRepository) {
 		this.bicicletaRepository = bicicletaRepository;		
 		this.emprestimoRepository = emprestimoRepository;
 		this.pontoRepository = pontoRepository;
+		this.ciclistaRepository = ciclistaRepository;
 	}
 	
 	public void devolverBicicleta(Ponto ponto, Integer idEmprestimo) {
 		Emprestimo emprestimo = emprestimoRepository.findById(idEmprestimo).get();
-		emprestimo.setPontoDevolucao(ponto);
+		//emprestimo.setPontoDevolucao(ponto);
 		emprestimo.setStatus("F");
 		emprestimo.setDataDevolucao(new Date());
 		
@@ -60,7 +63,7 @@ public class EmprestimoService {
 			emprestimo.setBicicleta(bicicleta);
 			emprestimo.setCiclista(ciclista); //usuario logado da sessao
 			emprestimo.setDataEmprestimo(new Date());
-			emprestimo.setPontoEmprestimo(ponto);
+			emprestimo.setPonto(ponto);
 			emprestimo.setStatus("A");
 			
 			emprestimoRepository.save(emprestimo);
@@ -104,14 +107,28 @@ public class EmprestimoService {
 		return pontosDTO;
 	}
 	
-	public List<Bicicleta> getBicicletasPorPonto(int idPonto){
+	public List<Bicicleta> findBicicletasByPonto(int idPonto){
 		
 		return bicicletaRepository.findByPonto(idPonto);		
-	} 	
+	}
+	
+	public List<Emprestimo> findEmprestimosByCiclista(int idCiclista){
+		
+		return emprestimoRepository.findAllByCiclista(idCiclista);		
+	}
 	
 	public Ponto findPontoById(int idPonto){
 		
-		return pontoRepository.findById(idPonto).get();
+		return pontoRepository.findById(idPonto).get();		
+	}
+	
+	public Ciclista findCiclistaById(int idCiclista){
 		
+		return ciclistaRepository.findById(idCiclista).get();		
+	}
+	
+	public List<Ponto> findPontos(){
+		
+		return pontoRepository.findAll();		
 	}
 }

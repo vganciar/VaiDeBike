@@ -7,66 +7,69 @@
 
 <title>Empréstimo de Bicicletas</title>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/custom.css">
 
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 </head>
 
 <body>
 	<div class="container">
+	
+		<div class="pull-right">
+			<img src="/images/logo.png">
+		</div>
 
-		<form method="POST" th:action="@{/reserva/{id}(id=${bicicleta.id})}">
-			<h3>Ponto</h3>
-			<hr>
+		<h3>Ponto</h3>
+		<hr>
 
+		<form method="POST" id="formEmprestimo">
 			<div th:object="${ponto}">
-				<fieldset>
-					<input type="text" th:field="*{id}" name="id"></input> <br />
 
-					<div class="form-group col-sm-6">
-						<input type="text" th:field="*{nome}" name="nome" class="form-control"></input>
-					</div>
+				<input type="hidden" th:field="*{id}"></input> 
+				
+				<br />
+				<div class="form-group col-sm-6">
+					<input th:field="*{nome}" class="form-control" readOnly="readonly"></input>
+				</div>
 
-					<br />
-					<div class="form-group col-sm-6">
-						<input type="text" th:field="*{endereco}" name="endereco" class="form-control"></input>
-					</div>
-				</fieldset>
-			</div>
-
-			<h3>Lista de Bicicletas</h3>
-			<hr>
-
-			<div th:unless="${#lists.isEmpty(bicicletas)}">
-				<div class="panel-body">
-					<div class="table-responsive">
-						<table class="table table-sm table-striped table-hover table-bordered">
-							<thead>
-								<tr>
-									<th>Modelo</th>
-									<th>Cor</th>
-									<th>Conservação</th>
-									<th><i class="fas fa-cog"></i></th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr th:id="${bicicleta.id}" th:each="bicicleta: ${bicicletas}">
-									<td th:text="${bicicleta.modelo}"></td>
-									<td th:text="${bicicleta.cor}"></td>
-									<td th:text="${bicicleta.conservacao}"></td>
-
-									<td>
-										<button type="submit" name="submit" value="value" class="btn btn-primary">Reservar</button>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
+				<div class="form-group col-sm-6">
+					<input th:field="*{endereco}" class="form-control" readOnly="readonly"></input>
 				</div>
 			</div>
 		</form>
+
+		<h3>Lista de Bicicletas</h3>
+		<hr>
+
+		<div th:unless="${#lists.isEmpty(bicicletas)}">
+			<div class="panel-body">
+				<div class="table-responsive">
+					<table class="table table-sm table-striped table-hover table-bordered">
+						<thead>
+							<tr>
+								<th>Modelo</th>
+								<th>Cor</th>
+								<th>Conservação</th>
+								<th><i class="glyphicon glyphicon-cog"></i></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:id="${bicicleta.id}" th:each="bicicleta: ${bicicletas}">
+								<td th:text="${bicicleta.modelo}"></td>
+								<td th:text="${bicicleta.cor}"></td>
+								<td th:text="${bicicleta.conservacao}"></td>
+
+								<td>
+									<button type="submit" class="btn btn-primary" form="formEmprestimo" th:formaction="@{/reservar/{bicicleta}(id=${bicicleta.id})}">Reservar</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 

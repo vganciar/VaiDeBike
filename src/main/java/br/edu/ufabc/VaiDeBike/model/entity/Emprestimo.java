@@ -31,12 +31,8 @@ public class Emprestimo {
 	private Ciclista ciclista;
 	
 	@ManyToOne
-	@JoinColumn(name="id_ponto_emprestimo")
-	private Ponto pontoEmprestimo;
-	
-	@ManyToOne
-	@JoinColumn(name="id_ponto_devolucao")
-	private Ponto pontoDevolucao;
+	@JoinColumn(name="id_ponto")
+	private Ponto ponto;
 
 	public int getId() {
 		return id;
@@ -86,19 +82,11 @@ public class Emprestimo {
 		this.ciclista = ciclista;
 	}
 
-	public Ponto getPontoEmprestimo() {
-		return pontoEmprestimo;
+	public Ponto getPonto() {
+		return ponto;
 	}
 
-	public void setPontoEmprestimo(Ponto pontoEmprestimo) {
-		this.pontoEmprestimo = pontoEmprestimo;
-	}
-
-	public Ponto getPontoDevolucao() {
-		return pontoDevolucao;
-	}
-
-	public void setPontoDevolucao(Ponto pontoDevolucao) {
-		this.pontoDevolucao = pontoDevolucao;
-	}			
+	public void setPonto(Ponto ponto) {
+		this.ponto = ponto;
+	}	
 }

@@ -1,6 +1,5 @@
 package br.edu.ufabc.VaiDeBike.model.entity;
 
-import java.time.LocalTime;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -34,6 +33,9 @@ public class Ponto {
 	
 	@OneToMany(mappedBy = "ponto")
 	private Set<Bicicleta> bicicletas;
+	
+	@OneToMany(mappedBy = "ponto")
+	private Set<Emprestimo> emprestimos;
 
 	public int getId() {
 		return id;
@@ -87,7 +89,7 @@ public class Ponto {
 		return horaInicial;
 	}
 
-	public void setHoraIncial(String horaInicial) {
+	public void setHoraInicial(String horaInicial) {
 		this.horaInicial = horaInicial;
 	}
 
@@ -98,4 +100,12 @@ public class Ponto {
 	public void setHoraFinal(String horaFinal) {
 		this.horaFinal = horaFinal;
 	}
+	
+	public Set<Emprestimo> getEmprestimos() {
+		return emprestimos;
+	}
+
+	public void setEmprestimos(Set<Emprestimo> emprestimos) {
+		this.emprestimos = emprestimos;
+	}	
 }
