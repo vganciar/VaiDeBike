@@ -34,6 +34,9 @@ public class Ponto {
 
 	@OneToMany(mappedBy = "ponto")
 	private Set<Bicicleta> bicicletas;
+	
+	@OneToMany(mappedBy = "ponto")
+	private Set<Emprestimo> emprestimos;
 
 	public int getId() {
 		return id;

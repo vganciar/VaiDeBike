@@ -124,7 +124,7 @@ public class EmprestimoService {
 	
 	public Ciclista findCiclistaById(int idCiclista){
 		
-		return ciclistaRepository.findById(idCiclista).get();		
+		return ciclistaRepository.findById(idCiclista);		
 	}
 	
 	public List<Ponto> findPontos(){

@@ -83,7 +83,7 @@ public class Bicicleta {
 		this.ponto = ponto;
 	}
 
-	public char getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
