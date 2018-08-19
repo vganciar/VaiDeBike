@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+
+<title>Cadastro de Usuário</title>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/custom.css">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+</head>
+
+</head>
+
+<body>
+
+<script type="text/javascript">
+	$(document).ready(function(){		
+		$("#login").change(function(){					
+			var vLogin = $("#login").val();
+			$.ajax({
+				url: 'http://localhost:8080/Usuario/validaLogin',
+				type: 'POST', 
+				data: {"login": vLogin},				
+				success: function(data){
+					if(data=="fail"){						
+						alert("Este login já está sendo utilizado.");
+						$("#login").val("");
+					} 
+				}, 
+				error: function(){		
+					$(location).attr('href','http://localhost:8080/menu');	
+				}
+			});	
+		});
+	});	
+</script>
+
+	<div class="jumbotron text-center">
+	  <h1>VAI DE BIKE</h1>	 
+	</div>
+
+	<div class="container">
+		
+		<h3>Cadastre-se!</h3><br />
+		
+		<form id = "formC" method="POST" th:action="@{/cadastraCiclista}">		
+			<div>
+				<fieldset>					
+					<div class="form-group col-sm-6">
+						<label>Nome</label>
+   						<input class="form-control" id="nome" name="nome" required>
+   					</div>
+					<br />
+					<div class="form-group col-sm-6">
+						<label>CPF</label>
+   						<input class="form-control" id="CPF" name="CPF" required pattern="\d{11}" maxlength="11" type="text">
+   					</div>
+					<br />
+					<div class="form-group col-sm-6">
+						<label>Celular</label>
+   						<input class="form-control" id="celular" name="celular" required pattern="\d{11}" maxlength="11" type="text">
+   					</div>
+					<br />
+					<div class="form-group col-sm-6">
+						<label>Login</label>
+   						<input class="form-control" id="login" name="login" required >
+   					</div>
+					<br />
+					<div class="form-group col-sm-6">
+						<label>Senha</label>
+   						<input type="password" class="form-control" id="senha" name="senha" required pattern=".{6,}" maxlength="8">
+   					</div>
+					<br />
+				</fieldset>
+			</div>
+			<button type="submit" name="submit" value="value" class="btn btn-primary" id="btn-salvar">Salvar</button>
+		</form>			
+	</div>	
+</body>
+
+</html>

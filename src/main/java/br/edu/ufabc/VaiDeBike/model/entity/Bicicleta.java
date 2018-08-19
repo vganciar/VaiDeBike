@@ -11,8 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 public class Bicicleta {
 
@@ -85,7 +83,7 @@ public class Bicicleta {
 		this.ponto = ponto;
 	}
 
-	public String getStatus() {
+	public char getStatus() {
 		return status;
 	}
 
@@ -100,5 +98,4 @@ public class Bicicleta {
 	public void setConservacao(int conservacao) {
 		this.conservacao = conservacao;
 	}
-
 }
