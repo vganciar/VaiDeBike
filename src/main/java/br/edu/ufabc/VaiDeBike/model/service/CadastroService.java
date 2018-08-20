@@ -1,22 +1,22 @@
 package br.edu.ufabc.VaiDeBike.model.service;
 
+import java.sql.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import br.edu.ufabc.VaiDeBike.model.entity.Bicicleta;
 import br.edu.ufabc.VaiDeBike.model.entity.Ciclista;
 import br.edu.ufabc.VaiDeBike.model.entity.Ponto;
-import br.edu.ufabc.VaiDeBike.model.entity.Usuario;
 import br.edu.ufabc.VaiDeBike.model.repository.BicicletaRepository;
-import br.edu.ufabc.VaiDeBike.model.repository.CiclistaRepository;
-import java.sql.Date;
-import java.util.Optional;
+import br.edu.ufabc.VaiDeBike.model.repository.UsuarioRepository;
 
 
 @Service
 public class CadastroService {
 	
 	@Autowired
-	private CiclistaRepository ciclistaRepository;
+	private UsuarioRepository ciclistaRepository;
 	@Autowired
 	private BicicletaRepository bibicletaRepository;
 	
@@ -24,7 +24,7 @@ public class CadastroService {
 		
 		Ciclista ciclista = new Ciclista();		
 		ciclista.setNome(nome);
-		ciclista.setCPF(CPF);
+		ciclista.setCpf(CPF);
 		ciclista.setCelular(celular);
 		ciclista.setLogin(login);
 		ciclista.setSenha(senha);

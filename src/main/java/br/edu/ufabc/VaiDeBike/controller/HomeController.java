@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.edu.ufabc.VaiDeBike.model.entity.Ciclista;
-import br.edu.ufabc.VaiDeBike.model.repository.CiclistaRepository;
 import br.edu.ufabc.VaiDeBike.model.repository.PontoRepository;
+import br.edu.ufabc.VaiDeBike.model.repository.UsuarioRepository;
 import br.edu.ufabc.VaiDeBike.model.service.LoginService;
 
 @Controller
@@ -22,7 +22,7 @@ public class HomeController {
 	private PontoRepository pontoRepository;
 	
 	@Autowired
-	private CiclistaRepository ciclistaRepository;
+	private UsuarioRepository ciclistaRepository;
 	
 	@Autowired
 	private LoginService loginService;
@@ -43,7 +43,7 @@ public class HomeController {
 	@RequestMapping("/ciclista/list")
 	public ModelAndView exibeListCiclistas(){
 		
-		List<Ciclista> ciclistas = ciclistaRepository.findAll();
+		List<Ciclista> ciclistas = ciclistaRepository.findAll("C");
 		
 		ModelAndView modelAndView = new ModelAndView("listCiclista");
 		modelAndView.addObject("ciclistas", ciclistas);				
@@ -79,8 +79,8 @@ public class HomeController {
 			return "fail";
 	}
 
-	@RequestMapping(value = { "/home" })
-	public String menu() {
+	@RequestMapping(value = { "/mapa" })
+	public String mapa() {
 		return "mapa";
 	}
 

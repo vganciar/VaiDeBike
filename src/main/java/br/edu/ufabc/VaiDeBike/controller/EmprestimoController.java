@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import br.edu.ufabc.VaiDeBike.model.entity.Bicicleta;
 import br.edu.ufabc.VaiDeBike.model.entity.Ciclista;
@@ -44,28 +45,30 @@ public class EmprestimoController {
 		List<Emprestimo> emprestimos = emprestimoService.findEmprestimosByCiclista(Integer.parseInt(idCiclista));		
 		List<Ponto> pontos = emprestimoService.findPontos();
 		Ciclista ciclista = emprestimoService.findCiclistaById(Integer.parseInt(idCiclista));
+		Ponto ponto = new Ponto();
 		
 		ModelAndView modelAndView = new ModelAndView("devolucao");
 		modelAndView.addObject("pontos", pontos);
 		modelAndView.addObject("emprestimos", emprestimos);
-		modelAndView.addObject("ciclista", ciclista);		
+		modelAndView.addObject("ciclista", ciclista);
+		modelAndView.addObject("ponto", ponto);
 
 		return modelAndView;
 	}
 		
 	@RequestMapping(value = "/reservar/{bicicleta}", method = RequestMethod.POST)
-	public String reservarBicicleta(Ponto ponto, @PathVariable("bicicleta") String idBicicleta){
+	public RedirectView reservarBicicleta(Ponto ponto, @PathVariable("bicicleta") String idBicicleta){
 		
 		emprestimoService.reservarBicicleta(ponto, Integer.parseInt(idBicicleta));
 		
-		return "mapa";
+		return new RedirectView("/mapa");
 	}
 	
 	@RequestMapping(value = "/devolver/{emprestimo}", method = RequestMethod.POST)
-	public String devolverBicicleta(Ponto ponto, @PathVariable("emprestimo") String idEmprestimo){
+	public RedirectView devolverBicicleta(Ponto ponto, Ciclista ciclista, @PathVariable("emprestimo") String idEmprestimo){
 		
 		emprestimoService.devolverBicicleta(ponto, Integer.parseInt(idEmprestimo));
 		
-		return "mapa";
+		return new RedirectView("/devolucao/" + ciclista.getId());
 	}
 }

@@ -16,56 +16,67 @@
 </head>
 
 <body>
-	<div class="jumbotron text-center">
-	  <h1>VAI DE BIKE</h1>	 
-	</div>
-
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Vai de Bike</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li class="active"><a th:href="@{/}"><i class="glyphicon glyphicon-home">&nbsp</i>Home</a></li>
+				<li><a th:href="@{/bicicleta/cadastro}">Bicileta</a></li>
+				<li><a th:href="@{/ciclista/list}">Empréstimos</a></li>				
+			</ul>
+		</div>
+	</nav>	
+	
 	<div class="container">
 		<h3>Cadastro de bicicleta</h3><br />
-		<form method="POST" th:action="@{/cadastraBicicleta}">
+		<form method="POST" th:action="@{/bicicleta/cadastrar}">
 		
 			<div>
 				<fieldset>					
-					<div class="form-group col-sm-6">
+					<div class="form-group col-sm-4">
 						<label>Modelo</label>
    						<input class="form-control" id="modelo" name="modelo" required>
    					</div>
-					<br />
-					<div class="form-group col-sm-6">
+					
+					<div class="form-group col-sm-4">
 						<label>Cor</label>
    						<input class="form-control" id="cor" name="cor" required>
    					</div>
-					<br />
-					<div class="form-group col-sm-6">
+					
+					<div class="form-group col-sm-4">
 						<label>Status</label>
    						<select class="form-control" id="status" name="status">
 							<option value="D">Disponível</option>	
 							<option value="I">Indisponível</option>	
 						</select>
    					</div>
-					<br />
+					
+					<br/>
 					<div class="form-group col-sm-6">
 						<label>Conservação</label>
    						<input class="form-control" id="conservacao" name="conservacao" required type="number" min="0" max="10" step="1">
    					</div>
-					<br />	
+						
 					<div class="form-group col-sm-6">
 						<label>Ponto</label>
    						<select class="form-control" id="ponto" name="ponto">
 							<option th:each="p : ${pto}" th:value="${p.id}" th:utext="${p.nome}"></option>		
 						</select>
-   					</div>
-					<br />				
+   					</div>									
 				</fieldset>
 			</div>
-			<div class="form-group col-sm-6">
-			<button type="submit" name="submit" value="value" class="btn btn-primary">Salvar</button>
-			</div>		
+			
+			<br/>
+			<div class="form-group col-sm-3">
+				<a th:href="@{/}" class="btn btn-info" role="button">Voltar</a>
+			</div>
+			
+			<div class="form-group col-sm-3 text-right pull-right">
+				<button type="submit" name="submit" value="value" class="btn btn-primary">Salvar</button>
+			</div>	
 		</form>
-		<br />
-		<div class="form-group col-sm-6">
-		<a href="/menu" class="btn btn-info" role="button">Voltar</a>
-		</div>
 	</div>	
 </body>
 

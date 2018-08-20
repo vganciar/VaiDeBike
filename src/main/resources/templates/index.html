@@ -24,7 +24,7 @@
 				var vSenha = $("#txtSenha").val();
 
 				$.ajax({
-						url : 'http://localhost:8080/usuario/login',
+						url : '/usuario/login',
 						type : 'POST',
 						data : {
 							"login" : vLogin,
@@ -32,7 +32,7 @@
 						},						
 						success : function(data) {
 							if (data == "ok") {
-								$(location).attr('href', 'http://localhost:8080/mapa');
+								$(location).attr('href', '/mapa');
 							} else {
 								alert("Usuário e/ou senha inválidos.");
 							}

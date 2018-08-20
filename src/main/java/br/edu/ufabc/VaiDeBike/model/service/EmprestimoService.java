@@ -13,25 +13,24 @@ import br.edu.ufabc.VaiDeBike.model.entity.Ciclista;
 import br.edu.ufabc.VaiDeBike.model.entity.Emprestimo;
 import br.edu.ufabc.VaiDeBike.model.entity.Ponto;
 import br.edu.ufabc.VaiDeBike.model.repository.BicicletaRepository;
-import br.edu.ufabc.VaiDeBike.model.repository.CiclistaRepository;
 import br.edu.ufabc.VaiDeBike.model.repository.EmprestimoRepository;
 import br.edu.ufabc.VaiDeBike.model.repository.PontoRepository;
+import br.edu.ufabc.VaiDeBike.model.repository.UsuarioRepository;
 
 @Service
 public class EmprestimoService {
 	
+	@Autowired
 	private EmprestimoRepository emprestimoRepository;			
-	private BicicletaRepository bicicletaRepository;
-	private PontoRepository pontoRepository;
-	private CiclistaRepository ciclistaRepository;
 	
 	@Autowired
-	public EmprestimoService(BicicletaRepository bicicletaRepository, PontoRepository pontoRepository, EmprestimoRepository emprestimoRepository, CiclistaRepository ciclistaRepository) {
-		this.bicicletaRepository = bicicletaRepository;		
-		this.emprestimoRepository = emprestimoRepository;
-		this.pontoRepository = pontoRepository;
-		this.ciclistaRepository = ciclistaRepository;
-	}
+	private BicicletaRepository bicicletaRepository;
+	
+	@Autowired
+	private PontoRepository pontoRepository;
+	
+	@Autowired
+	private UsuarioRepository ciclistaRepository;
 	
 	public void devolverBicicleta(Ponto ponto, Integer idEmprestimo) {
 		Emprestimo emprestimo = emprestimoRepository.findById(idEmprestimo).get();

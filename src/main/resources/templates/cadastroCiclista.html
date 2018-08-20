@@ -22,7 +22,7 @@
 		$("#login").change(function(){					
 			var vLogin = $("#login").val();
 			$.ajax({
-				url: 'http://localhost:8080/usuario/validaLogin',
+				url: '/usuario/validaLogin',
 				type: 'POST', 
 				data: {"login": vLogin},				
 				success: function(data){
@@ -31,53 +31,66 @@
 						$("#login").val("");
 					} 
 				}, 
-				error: function(){		
-					$(location).attr('href','http://localhost:8080');	
+				error: function(){
+					$(location).attr('href','/');	
 				}
 			});	
 		});
 	});	
 </script>
 
-	<div class="jumbotron text-center">
-	  <h1>VAI DE BIKE</h1>	 
-	</div>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Vai de Bike</a>
+			</div>
+			<ul class="nav navbar-nav">			
+				<li class="active"><a href="#"><i class="glyphicon glyphicon-home">&nbsp</i>Home</a></li>	
+				<li><a th:href="@{/mapa}">Mapa</a></li>				
+			</ul>
+		</div>
+	</nav>
 
 	<div class="container">
 		
-		<h3>Cadastre-se!</h3><br />
+		<h3>Cadastre-se!</h3>
+		<hr>
+		<br/>
 		
-		<form id = "formC" method="POST" th:action="@{/cadastraCiclista}">		
+		<form id = "formC" method="POST" th:action="@{/ciclista/cadastrar}">		
 			<div>
 				<fieldset>					
-					<div class="form-group col-sm-6">
+					<div class="form-group col-sm-12">
 						<label>Nome</label>
    						<input class="form-control" id="nome" name="nome" required>
    					</div>
-					<br />
+					
 					<div class="form-group col-sm-6">
 						<label>CPF</label>
-   						<input class="form-control" id="CPF" name="CPF" required pattern="\d{11}" maxlength="11" type="text">
+   						<input class="form-control" id="CPF" name="CPF" pattern="([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})" maxlength="14" type="text" required >
    					</div>
-					<br />
+					
 					<div class="form-group col-sm-6">
 						<label>Celular</label>
-   						<input class="form-control" id="celular" name="celular" required pattern="\d{11}" maxlength="11" type="text">
+   						<input class="form-control" type="text" id="celular" name="celular" pattern="^\([1-9]{2}\) [2-9][0-9]{3,4}\-[0-9]{4}$" maxlength="15" required >
    					</div>
-					<br />
+					
 					<div class="form-group col-sm-6">
 						<label>Login</label>
    						<input class="form-control" id="login" name="login" required >
    					</div>
-					<br />
+					
 					<div class="form-group col-sm-6">
 						<label>Senha</label>
-   						<input type="password" class="form-control" id="senha" name="senha" required pattern=".{6,}" maxlength="8">
-   					</div>
-					<br />
+   						<input class="form-control" type="password" id="senha" name="senha" pattern=".{6,}" maxlength="10" required>
+   					</div>					
 				</fieldset>
 			</div>
-			<button type="submit" name="submit" value="value" class="btn btn-primary" id="btn-salvar">Salvar</button>
+			
+			<br/>
+			<div class="form-group col-sm-3">
+				<button type="submit" name="submit" value="value" class="btn btn-primary" id="btn-salvar">Salvar</button>
+			</div>
 		</form>			
 	</div>	
 </body>

@@ -15,6 +15,17 @@
 </head>
 
 <body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Vai de Bike</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="#"><i class="glyphicon glyphicon-home">&nbsp</i>Home</a></li>				
+			</ul>
+		</div>
+	</nav>
+
 	<div class="container">
 		<h3>Ponto</h3>
 		<hr>
@@ -22,9 +33,7 @@
 		<form method="POST" id="formEmprestimo">
 			<div th:object="${ponto}">
 
-				<input type="hidden" th:field="*{id}"></input> 
-				
-				<br />
+				<input type="hidden" th:field="*{id}"></input> <br />
 				<div class="form-group col-sm-6">
 					<input th:field="*{nome}" class="form-control" readOnly="readonly"></input>
 				</div>
@@ -35,6 +44,9 @@
 			</div>
 		</form>
 
+		<br />
+		<br />
+		<br />
 		<h3>Lista de Bicicletas</h3>
 		<hr>
 

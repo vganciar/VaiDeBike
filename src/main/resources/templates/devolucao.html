@@ -16,37 +16,47 @@
 </head>
 
 <body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Vai de Bike</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li class="active"><a th:href="@{/}"><i class="glyphicon glyphicon-home">&nbsp</i>Home</a></li>
+				<li><a th:href="@{/bicicleta/cadastro}">Bicileta</a></li>
+				<li><a th:href="@{/ciclista/list}">Empréstimos</a></li>				
+			</ul>
+		</div>
+	</nav>
+	
 	<div class="container">
-
 		<h3>Ciclista</h3>
 		<hr>
 
 		<form method="POST" id="formDevolucao">
 			<div th:object="${ciclista}">
-
-				<input th:field="*{id}"></input> <br />
-				<div class="form-group col-sm-6">
+				<input type="hidden" th:field="*{id}"></input> 
+				
+				<br />
+				<div class="form-group col-sm-4">
 					<input th:field="*{nome}" class="form-control" readOnly="readonly"></input>
 				</div>
-
-				<br />
-				<div class="form-group col-sm-6">
+				
+				<div class="form-group col-sm-4">
 					<input th:field="*{cpf}" class="form-control" readOnly="readonly"></input>
 				</div>
-			</div>
-
-			<br />
+			</div>			
 
 			<div th:object="${ponto}">
-				<div class="form-group col-sm-6">
-					<select class="form-control" name="id">
-						<option value="0" th:text="Selecionar Ponto"></option>
-						<option th:each="ponto : ${pontos}" th:value="${ponto.id}" th:text="${ponto.nome}"></option>
-					</select>
+				<div class="form-group col-sm-4">
+					<select th:field="*{id}" class="form-control">						
+  						<option th:each="ponto : ${pontos}" th:value="${ponto.id}" th:text="${ponto.nome}"></option>
+					</select>			
 				</div>
 			</div>
 		</form>
 
+		<br/><br/><br/>
 		<h3>Lista de Emprestimos</h3>
 		<hr>
 
@@ -59,9 +69,8 @@
 								<th>Ponto de Empréstimo</th>
 								<th>Modelo da Bicicleta</th>
 								<th>Data do Empréstimo</th>
-								<th>Data para Devolução</th>
-								<th>Status</th>
-								<th><i class="glyphicon glyphicon-cog"></i></th>
+								<th>Data da Devolução</th>
+								<th>Status</th>								
 							</tr>
 						</thead>
 						<tbody>
@@ -74,7 +83,7 @@
 								<td>
 									<div th:switch="${emprestimo.status}">
 										<div th:case="A">
-											<button type="submit" class="btn btn-primary" form="formDevolucao" th:formaction="@{/devolver/{emprestimo}(id=${emprestimo.id})}">Devolver</button>
+											<button type="submit" class="btn btn-primary" form="formDevolucao" th:formaction="@{/devolver/{emprestimo}(emprestimo=${emprestimo.id})}">Devolver</button>
 										</div>
 										
 										<div th:case="F">

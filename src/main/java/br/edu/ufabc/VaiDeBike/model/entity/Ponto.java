@@ -1,6 +1,5 @@
 package br.edu.ufabc.VaiDeBike.model.entity;
 
-import java.time.LocalTime;
 import java.util.Set;
 
 import javax.persistence.Column;

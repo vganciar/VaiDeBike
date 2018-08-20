@@ -47,7 +47,7 @@ function initialize() {
 			var contentHTML;
 			
 			if (obj.bicicletasDisponiveis > 0){				
-				contentHTML = '<p><b>'+ obj.nome +'</b></p>' + '<p>' + obj.endereco + '</p>' + '<p>Horário de funcionamento: ' + obj.horaIncial + ' às ' + obj.horaFinal + '</p>' + '<p>Bicicletas disponíveis: ' + obj.bicicletasDisponiveis + '</p>' + '<a href="/emprestimo/' + obj.id + '"><input type"button" class="btn btn-primary" value="Reservar bicicleta"/></a>';	
+				contentHTML = '<p><b>'+ obj.nome +'</b></p>' + '<p>' + obj.endereco + '</p>' + '<p>Horário de funcionamento: ' + obj.horaInicial + ' às ' + obj.horaFinal + '</p>' + '<p>Bicicletas disponíveis: ' + obj.bicicletasDisponiveis + '</p>' + '<a href="/emprestimo/' + obj.id + '"><input type"button" class="btn btn-primary" value="Reservar bicicleta"/></a>';	
 			}
 			else
 			{

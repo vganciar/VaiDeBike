@@ -10,20 +10,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import org.springframework.stereotype.Repository;
 
-@Repository
 @Entity
 @Inheritance (strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "tipo", length = 1, discriminatorType = DiscriminatorType.CHAR)
+@DiscriminatorColumn(name = "tipo", length = 1, discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue("U")
-public class Usuario {	
+public abstract class Usuario {	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
 	@Column(nullable = false)
-	private String CPF;	
+	private String cpf;	
 	
 	@Column(nullable = false)
 	private String nome;
@@ -32,7 +30,7 @@ public class Usuario {
 	private String celular;	
 	
 	@Column(insertable=false, updatable=false)
-    private char tipo;	
+    private String tipo;	
 	
 	@Column(nullable = false)
 	private String login;
@@ -47,15 +45,15 @@ public class Usuario {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	public String getCPF() {
-		return CPF;
+	
+	public String getCpf() {
+		return cpf;
 	}
 
-	public void setCPF(String cPF) {
-		CPF = cPF;
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
-
+	
 	public String getNome() {
 		return nome;
 	}
@@ -72,11 +70,11 @@ public class Usuario {
 		this.celular = celular;
 	}
 
-	public char getTipo() {
+	public String getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(char tipo) {
+	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
 	
@@ -94,6 +92,5 @@ public class Usuario {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
-	}
-	
+	}	
 }
