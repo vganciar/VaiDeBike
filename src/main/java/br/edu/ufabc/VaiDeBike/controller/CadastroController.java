@@ -8,8 +8,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import br.edu.ufabc.VaiDeBike.model.entity.Ponto;
+import br.edu.ufabc.VaiDeBike.model.entity.Usuario;
+import br.edu.ufabc.VaiDeBike.model.repository.CiclistaRepository;
 import br.edu.ufabc.VaiDeBike.model.repository.PontoRepository;
 import br.edu.ufabc.VaiDeBike.model.service.CadastroService;
+import br.edu.ufabc.VaiDeBike.model.service.SessaoService;
 
 @Controller
 public class CadastroController {
@@ -17,6 +20,10 @@ public class CadastroController {
 	private CadastroService cadastroService;
 	@Autowired
 	private PontoRepository pontoRepository;
+	@Autowired
+	private CiclistaRepository ciclistaRepository;
+	@Autowired 
+	public SessaoService sessao;
 	
 	//pagina inicial com login e senha
 	@RequestMapping("/") 
@@ -58,24 +65,39 @@ public class CadastroController {
 	
 	@ResponseBody
 	@RequestMapping(value = {"/Usuario/login"}, method = RequestMethod.POST)
-	public String login(@RequestParam String login, @RequestParam String senha) {
+	public String login(@RequestParam String login, @RequestParam String senha) throws Exception {
 				
-		if(cadastroService.verificaLoginSenha(login, senha)) return "ok";
+		if(cadastroService.verificaLoginSenha(login, senha)) {
+			Usuario us = new Usuario();
+			us = ciclistaRepository.findOne(login);
+			sessao.logarUser(us);
+			System.out.println("LOGADOO**************" + sessao.getUserLogado().getId()+", "+sessao.getUserLogado().getNome());
+			return "ok";
+			}
 		else return "fail";
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = {"/Usuario/validaLogin"}, method = RequestMethod.POST)
-	public String valida(@RequestParam String login) {
-		
+	public String valida(@RequestParam String login) {		
 		if(cadastroService.verificaLogin(login)) return "ok";
 		else return "fail";
+	}	
+	
+	//pagina intermediaria temporaria
+	@RequestMapping(value = {"/menu"})
+	public ModelAndView menu() {
+		ModelAndView mv = new ModelAndView("menu");	
+		mv.addObject("us", sessao.getUserLogado());
+		return mv;
 	}
 	
-	
-	@RequestMapping(value = {"/menu"})   //pagina intermediaria temporaria
-	public String menu() {
-		return "menu";
+	@RequestMapping(value = {"/logout"})   //pagina intermediaria temporaria
+	public String logout() throws Exception {
+		sessao.logout();
+		System.out.println("deslogado ******************");
+		System.out.println(sessao.getUserLogado());
+		return "index";
 	}
 	
 }
