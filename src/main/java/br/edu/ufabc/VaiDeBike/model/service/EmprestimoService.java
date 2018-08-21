@@ -16,6 +16,7 @@ import br.edu.ufabc.VaiDeBike.model.repository.BicicletaRepository;
 import br.edu.ufabc.VaiDeBike.model.repository.EmprestimoRepository;
 import br.edu.ufabc.VaiDeBike.model.repository.PontoRepository;
 import br.edu.ufabc.VaiDeBike.model.repository.UsuarioRepository;
+import ch.qos.logback.core.status.Status;
 
 @Service
 public class EmprestimoService {
@@ -32,17 +33,26 @@ public class EmprestimoService {
 	@Autowired
 	private UsuarioRepository ciclistaRepository;
 	
-	public void devolverBicicleta(Ponto ponto, Integer idEmprestimo) {
+	@Autowired
+	private SessaoService sessao;
+	
+	public void devolverBicicleta(Integer idPonto, Integer idEmprestimo) {
 		Emprestimo emprestimo = emprestimoRepository.findById(idEmprestimo).get();
+		
 		//emprestimo.setPontoDevolucao(ponto);
 		emprestimo.setStatus("F");
-		emprestimo.setDataDevolucao(new Date());
+		emprestimo.setDataDevolucao(new Date());		
 		
 		emprestimoRepository.save(emprestimo);
 		
-		Bicicleta bicicleta = emprestimo.getBicicleta();
+		Bicicleta bicicleta = new Bicicleta();
+		bicicleta.setId(emprestimo.getBicicleta().getId());
+		bicicleta.setCor(emprestimo.getBicicleta().getCor());
+		bicicleta.setDataAquisicao(emprestimo.getBicicleta().getDataAquisicao());
+		bicicleta.setModelo(emprestimo.getBicicleta().getModelo());
+		bicicleta.setConservacao(emprestimo.getBicicleta().getConservacao());
 		bicicleta.setStatus("D");
-		bicicleta.setPonto(ponto);
+		bicicleta.setPonto(pontoRepository.findById(idPonto).get());
 		
 		bicicletaRepository.save(bicicleta);
 	}
@@ -50,22 +60,18 @@ public class EmprestimoService {
 	public Boolean reservarBicicleta(Ponto ponto, Integer idBicicleta) {		
 		Bicicleta bicicleta = bicicletaRepository.findById(idBicicleta).get();
 		
-		if (bicicleta.getStatus().equals("D")) {
-			bicicleta.setStatus("I");
-			bicicletaRepository.save(bicicleta);
-			
-			Emprestimo emprestimo = new Emprestimo(); 
-			
-			Ciclista ciclista = new Ciclista();
-			ciclista.setId(1);
-			
+		if (bicicleta.getStatus().equals("D") && emprestimoRepository.findEmprestimoAbertoByCiclista(sessao.getUsuarioLogado().getId()) == 0) {
+			Emprestimo emprestimo = new Emprestimo();
 			emprestimo.setBicicleta(bicicleta);
-			emprestimo.setCiclista(ciclista); //usuario logado da sessao
+			emprestimo.setCiclista((Ciclista) sessao.getUsuarioLogado()); //usuario logado da sessao
 			emprestimo.setDataEmprestimo(new Date());
 			emprestimo.setPonto(ponto);
 			emprestimo.setStatus("A");
 			
 			emprestimoRepository.save(emprestimo);
+			
+			bicicleta.setStatus("I");
+			bicicletaRepository.save(bicicleta);
 			
 			return true;
 		}

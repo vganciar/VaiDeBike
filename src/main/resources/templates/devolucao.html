@@ -47,13 +47,13 @@
 				</div>
 			</div>			
 
-			<div th:object="${ponto}">
+			<!-- <div th:object="${ponto}"> -->
 				<div class="form-group col-sm-4">
-					<select th:field="*{id}" class="form-control">						
+					<select name="idPonto" class="form-control">						
   						<option th:each="ponto : ${pontos}" th:value="${ponto.id}" th:text="${ponto.nome}"></option>
 					</select>			
 				</div>
-			</div>
+			<!-- </div> -->
 		</form>
 
 		<br/><br/><br/>

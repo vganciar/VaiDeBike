@@ -14,4 +14,7 @@ public interface EmprestimoRepository extends JpaRepository<Emprestimo, Integer>
 	
 	@Query("SELECT e FROM Emprestimo e WHERE id_ciclista = :idCiclista")
     public List<Emprestimo> findAllByCiclista(@Param("idCiclista") int idCiclista);
+	
+	@Query("SELECT count(*) FROM Emprestimo WHERE id_ciclista = :idCiclista and status = 'A'")
+    public int findEmprestimoAbertoByCiclista(@Param("idCiclista") int idCiclista);
 }

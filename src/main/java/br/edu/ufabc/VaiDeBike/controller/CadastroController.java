@@ -8,24 +8,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
 import br.edu.ufabc.VaiDeBike.model.entity.Ponto;
-<<<<<<< HEAD
-=======
-import br.edu.ufabc.VaiDeBike.model.entity.Usuario;
-import br.edu.ufabc.VaiDeBike.model.repository.CiclistaRepository;
-import br.edu.ufabc.VaiDeBike.model.repository.PontoRepository;
->>>>>>> master
 import br.edu.ufabc.VaiDeBike.model.service.CadastroService;
-import br.edu.ufabc.VaiDeBike.model.service.SessaoService;
 
 @Controller
 public class CadastroController {
-<<<<<<< HEAD
-=======
+
 	@Autowired
 	private CadastroService cadastroService;
-	
-	@Autowired 
-	public SessaoService sessao;
 		
 	@RequestMapping(value = {"/ciclista/cadastrar"}, method = RequestMethod.POST)
 	public RedirectView cadastrarUsuario(@RequestParam String nome, @RequestParam String CPF, @RequestParam String celular, @RequestParam String login, @RequestParam String senha) {		
@@ -41,14 +30,5 @@ public class CadastroController {
 		cadastroService.cadastrarBicicleta(modelo, cor, status, conservacao, ponto);
 		
 		return new RedirectView("/bicicleta/cadastro");
-	}
-	
-	@RequestMapping(value = {"/logout"})   //pagina intermediaria temporaria
-	public String logout() throws Exception {
-		sessao.logout();
-		System.out.println("deslogado ******************");
-		System.out.println(sessao.getUserLogado());
-		
-		return "index";
 	}
 }

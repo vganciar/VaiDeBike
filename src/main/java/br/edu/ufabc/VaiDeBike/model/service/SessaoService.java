@@ -5,26 +5,22 @@ import br.edu.ufabc.VaiDeBike.model.entity.Usuario;
 @Service
 public class SessaoService {
 	
-    private Usuario usuario;
+    private Usuario usuarioLogado;
          
-    public void logarUser(Usuario usuario) throws Exception {
-        if(getUserLogado() == null) { 
-        	this.usuario = usuario;
-       } else {
-            throw new Exception("Ja existe um usuario logado.");
-        }
+    public void login(Usuario usuario) {
+        if(getUsuarioLogado() == null) { 
+        	this.usuarioLogado = usuario;
+       } 
     }
     
-    public void logout() throws Exception{
-        if( getUserLogado() != null ) {
-        	this.usuario = null;
-        } else {
-            throw new Exception("Nao ha usuario logado.");
-        }
+    public void logout() {
+        if( getUsuarioLogado() != null ) {
+        	this.usuarioLogado = null;
+       } 
     }
  
-    public Usuario getUserLogado() {
-        return this.usuario; 
+    public Usuario getUsuarioLogado() {
+        return this.usuarioLogado; 
     }
         
 }

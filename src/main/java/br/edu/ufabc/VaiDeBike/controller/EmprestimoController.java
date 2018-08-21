@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -21,10 +22,6 @@ public class EmprestimoController {
 	
 	@Autowired
 	private EmprestimoService emprestimoService;
-	
-	/*public EmprestimoController(EmprestimoService emprestimoService) {		
-		this.emprestimoService = emprestimoService;
-	}*/
 	
 	@RequestMapping("/emprestimo/{ponto}")
 	public ModelAndView exibeEmprestimo(@PathVariable("ponto") String idPonto){
@@ -65,9 +62,9 @@ public class EmprestimoController {
 	}
 	
 	@RequestMapping(value = "/devolver/{emprestimo}", method = RequestMethod.POST)
-	public RedirectView devolverBicicleta(Ponto ponto, Ciclista ciclista, @PathVariable("emprestimo") String idEmprestimo){
+	public RedirectView devolverBicicleta(Ciclista ciclista, @RequestParam int idPonto, @PathVariable("emprestimo") int idEmprestimo){
 		
-		emprestimoService.devolverBicicleta(ponto, Integer.parseInt(idEmprestimo));
+		emprestimoService.devolverBicicleta(idPonto, idEmprestimo);
 		
 		return new RedirectView("/devolucao/" + ciclista.getId());
 	}

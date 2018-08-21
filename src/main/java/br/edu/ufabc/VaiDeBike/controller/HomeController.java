@@ -14,6 +14,7 @@ import br.edu.ufabc.VaiDeBike.model.entity.Ciclista;
 import br.edu.ufabc.VaiDeBike.model.repository.PontoRepository;
 import br.edu.ufabc.VaiDeBike.model.repository.UsuarioRepository;
 import br.edu.ufabc.VaiDeBike.model.service.LoginService;
+import br.edu.ufabc.VaiDeBike.model.service.SessaoService;
 
 @Controller
 public class HomeController {
@@ -26,6 +27,9 @@ public class HomeController {
 	
 	@Autowired
 	private LoginService loginService;
+	
+	@Autowired 
+	public SessaoService sessao;
 
 	// pagina inicial com login e senha
 	@RequestMapping("/")
@@ -63,10 +67,27 @@ public class HomeController {
 	@RequestMapping(value = { "/usuario/login" }, method = RequestMethod.POST)
 	public String login(@RequestParam String login, @RequestParam String senha) {
 
-		if (loginService.verificaLoginSenha(login, senha))
-			return "ok";
-		else
+		try {
+			if (loginService.verificaLoginSenha(login, senha)) {
+			
+				Ciclista usuario = ciclistaRepository.findByLogin(login);			
+				sessao.login(usuario);
+			
+				return "ok";
+			}
+			
 			return "fail";
+			
+		}
+		catch(Exception e) {
+			return "fail";
+		}
+	}
+	
+	@RequestMapping(value = {"/usuario/logout"})   //pagina intermediaria temporaria
+	public String logout() throws Exception {
+		sessao.logout();		
+		return "index";
 	}
 
 	@ResponseBody
